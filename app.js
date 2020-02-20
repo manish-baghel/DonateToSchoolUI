@@ -5,12 +5,13 @@ var favicon = require('serve-favicon');
 var app = require('./ApplicationInstance');
 var compression = require('compression');
 var mainRoutes = require('./backend/routes/MainRoutes');
+const env = require('./env');
 
 app.use(compression());
 app.use(favicon(path.resolve(__dirname, 'favicon.png')));
 app.use(express.static(path.resolve(__dirname, 'client')));
 
-app.set('port', process.env.PORT || 4000);
+app.set('port',env.PORT);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.set('views', __dirname + '/client/views');

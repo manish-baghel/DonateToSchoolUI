@@ -1,29 +1,86 @@
+const fetchConfig = require("../services/fetch-configs");
+const apiService = require("../services/ApiService");
+
 const home = async (req,res) => {
-	res.render('index');
+	console.log(req.headers);
+	return res.render('index',{user:undefined,token:undefined});
 }
 
-
+// get controllers
 const login = async (req,res) => {
-	res.render('login');
+	return res.render('login');
 }
-
+const signup = async (req,res) => {
+	return res.render('sign_up');
+}
 
 
 const donate = async (req,res) => {
-	res.render('donate');
+	return res.render('donate');
 }
 
+
+// post controllers
+
 const register = async (req,res) => {
-	res.render('register');
+	let {fname,lname,gender,password,email,phone} = req.body;
+	let payload = {first_name:fname,last_name:lname,gender,password,email,phone};
+	let resp;
+	try{
+		resp = await apiService.post("/register",payload);
+	}catch(err){
+		console.log(err);
+		return res.render('sign_up',{status:false,msg:"Internal Server Error"});
+	}
+	if(!resp.status)
+		return res.render('sign_up',{msg:resp.msg,status:false});
+	let user = {
+		first_name:resp.data.first_name,
+		last_name:resp.data.last_name,
+		email:resp.data.email,
+		role:resp.data.role
+	}
+	let token = resp.data.token;
+	return res.render('index',{token:token,user:user,msg:"User registered succesfully",status:true});
 }
 
 const signin = async (req,res) => {
-	res.render('signin');
+	let {password,email} = req.body;
+	if(! password || !email )
+		return res.render('login',{status:false,msg:"Please enter all field"});
+	let payload = {password,email};
+	let resp;
+	console.log("Logging in with ", email , " and " , password);
+	try{
+		resp = await apiService.post("/login",payload);
+	}catch(err){
+		console.log(err);
+		return res.render('login',{status:false,msg:"Internal Server Error"});
+	}
+	if(!resp.status)
+		return res.render('login',{msg:resp.msg,status:false});
+	let user = {
+		first_name:resp.data.first_name,
+		last_name:resp.data.last_name,
+		email:resp.data.email,
+		role:resp.data.role
+	}
+	let token = resp.data.token;
+	return res.render('index',{token:token,user:user,msg:"User logged in succesfully",status:true});
+}
+
+
+const getRequirements = async(req,res) => {
+	let resData = await apiService.get('/getAllReqs');
+	if(!resData)
+		res.render('requirements',{msg:"No requirements found"});
+	res.render('requirements',{data:resData});
 }
 
 module.exports = {
 	home:home,
 	login:login,
+	signup:signup,
 	donate:donate,
 	signin:signin,
 	register:register

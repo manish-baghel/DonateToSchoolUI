@@ -1,0 +1,65 @@
+<footer>
+  <div class="container-fluid">
+      <div class="row footer-top">
+          <div class="col-sm-4 text-center">
+              <h4 class="ft-text-title">Donate to Schools</h4>
+              <h6 class="ft-desp">
+                  <br>Delhi, India
+              </h6>
+              <h4 class="details">
+                  <a class="contact" href="tel:+977-1-4107223">
+                      <i class="fa fa-phone" aria-hidden="true"></i> +977-000000</a>
+                  </h4>
+              </div>
+              <div class="col-sm-4 text-center border-left">
+                  <h4 class="ft-text-title">Team</h4>
+                  <div class="address-member">
+                      <p class="member">
+                          <b>Founder</b> : 
+                      </p>
+                 </div>
+             </div>
+             <div class="col-sm-4 col-xs-12 text-center border-left">
+              <h4 class="ft-text-title">About</h4>
+              <div class="pspt-dtls">
+                  <a href="index.html#about_us" class="about">About</a>
+                  <a href="index.html" class="advertise">FAQ</a>
+                  <br><br><br><br><br><br><br>
+              </div>
+          </div>
+      </div>
+    <div class="row ft-copyright pt-2 pb-2" style="padding-left: 25px;">
+      <div class="col-sm-4 text-pp-crt">copyright 2020 All  Rights Reserved</div>
+      <div class="col-sm-4 text-pp-crt-rg">Education supporting foundation </div>
+      <div class="col-sm-4 developer">
+        <a href="https://topline-tech.com" target="_blank" class="text-pp-crt">By : <b></b>RAVI MANISH VIPUL</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<% if (user != "undefined" && token != "undefined") { %>
+  <user style="display:none"><%= JSON.stringify(user) %></user>
+  <token style="display:none"><%= token %></token>
+
+  <script>
+    let store = window.store;
+    let userElem = document.getElementsByTagName("user")[0];
+    let tokenElem = document.getElementsByTagName("token")[0];
+    if(userElem.innerHTML && tokenElem.innerHTML){
+      let user = JSON.parse(userElem.innerHTML);
+      let token = tokenElem.innerHTML;
+
+      console.log(user,"  ",token);
+      for (var key in user) {
+        if (user.hasOwnProperty(key)) {
+          var val = user[key];
+          store.set(key, val).then(() => console.log("Succesfully set ",key, ":", val));
+        }
+      }
+      store.set("xxx-don-auth-token", token).then(() => console.log("Succesfully set ","xxx-don-auth-token", ":", token));
+    }
+  </script>
+
+
+<% } %>

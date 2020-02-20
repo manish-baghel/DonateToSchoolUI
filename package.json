@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "ENV='dev' nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,8 @@
     "cors": "^2.8.5",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "path": "^0.12.7"
+    "node-fetch": "^2.6.0",
+    "path": "^0.12.7",
+    "yenv": "^2.1.1"
   }
 }

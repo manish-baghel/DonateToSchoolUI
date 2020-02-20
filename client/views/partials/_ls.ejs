@@ -1,0 +1,20 @@
+<% if (typeof user != "undefined" && typeof token != "undefined") { %>
+  <user style="display:none"><%= JSON.stringify(user) %></user>
+  <token style="display:none"><%= token %></token>
+
+  <script>
+  	let store = window.store;
+    let user = JSON.parse(document.getElementsByTagName("user")[0].innerHTML);
+    let token = document.getElementsByTagName("token")[0].innerHTML;
+    console.log(user,"  ",token);
+    for (var key in user) {
+  		if (user.hasOwnProperty(key)) {
+    		var val = user[key];
+    		store.set(key, val).then(() => console.log("Succesfully set ",key, ":", value));
+  		}
+	}
+    store.set("xxx-don-auth-token", token).then(() => console.log("Succesfully set ","xxx-don-auth-token", ":", token));
+  </script>
+
+
+<% } %>

@@ -10,8 +10,8 @@ var app = require("../../ApplicationInstance");
 
 router.route('/').get(mainController.home);
 router.route('/donate').get(mainController.donate);
+router.route('/signup').get(mainController.signup);
 router.route('/login').get(mainController.login);
-
 
 
 

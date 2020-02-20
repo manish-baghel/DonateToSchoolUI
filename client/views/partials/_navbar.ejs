@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(0,0,0,.7)">
+  <div class="container">
+    <a class="navbar-brand" href="/">Donate to Schools</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Find a school to support
+                <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#about_us">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<% if (true) { %>
+  <script>
+    function signOut(){
+          window.store.clear().then(() => {
+            console.log("Signed Out Succesfully");
+            window.location.reload();
+            alert("Signed out Succesfully");
+          })
+        }
+    window.store.get("first_name").then((data) => {
+      if(data){
+        var elements = document.getElementsByClassName('navbar-nav');
+        var elem = elements[elements.length-1].lastElementChild.lastElementChild;
+        elem.innerHTML = "Hi "+ data;
+        elem.setAttribute('href','/profile');
+        var btn = document.createElement("BUTTON");
+        btn.innerHTML = "Sign Out"
+        btn.setAttribute("onclick","signOut()");
+        elements[elements.length-1].lastElementChild.appendChild(btn);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  </script>
+<% } %>
