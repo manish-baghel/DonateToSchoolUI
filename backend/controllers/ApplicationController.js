@@ -13,10 +13,15 @@ const login = async (req,res) => {
 const signup = async (req,res) => {
 	return res.render('sign_up');
 }
-
-
-const donate = async (req,res) => {
-	return res.render('donate');
+const findSchool = async (req,res) => {
+	let token = req.headers['xxx-don-auth-token'];
+	let resData = await apiService.get('/getAllReqs',token);
+	if(!resData)
+		return res.render('donor/find_school', {msg:"No requirements listed yet"});
+	let status= resData.status;
+	let msg = resData.msg;
+	let data = resData.data;
+	res.render('donor/find_school',{status,msg,data});
 }
 
 
@@ -70,18 +75,11 @@ const signin = async (req,res) => {
 }
 
 
-const getRequirements = async(req,res) => {
-	let resData = await apiService.get('/getAllReqs');
-	if(!resData)
-		res.render('requirements',{msg:"No requirements found"});
-	res.render('requirements',{data:resData});
-}
-
 module.exports = {
 	home:home,
 	login:login,
 	signup:signup,
-	donate:donate,
+	findSchool:findSchool,
 	signin:signin,
 	register:register
 }

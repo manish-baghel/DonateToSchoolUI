@@ -4,9 +4,8 @@
   <meta charset="utf-8">
   <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
   <title>Donate To Schools</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no" >
-  <link href="styles/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no" >
+  <%- include('partials/_topStyles') -%>
   <style type="text/css">
     body{
           ;
@@ -200,7 +199,7 @@
       html{
         scroll-behavior: smooth;
       }</style>
-  <script src="scripts/jquery.min.js"></script>
+  
   <script src="scripts/idbkvstore.min.js"></script>
   <script>if ('serviceWorker' in navigator) {
   window.store = new IdbKvStore('user-data');
@@ -212,10 +211,9 @@
     });
   });
 }</script>
-    <script src="scripts/bootstrap.min.js"></script>
 </head>
 <body >
-<%- include('partials/_navbar',{user:user,token:token}) -%>
+<%- include('partials/_navbar') -%>
 
 <header>
   <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
@@ -330,6 +328,7 @@
       var cUrl = window.location.origin+"/";
       if(window.location.href != cUrl)
         window.location.href = cUrl;
-    </script>
+</script>
+<%- include('partials/_bottomScripts') -%>
 </body>
 </html>

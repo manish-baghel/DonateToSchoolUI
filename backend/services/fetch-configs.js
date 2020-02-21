@@ -14,10 +14,15 @@ const fetchConfig = (method, load, isMultipart, token) => {
   //some new text added want to add more, need more testing                                    
   headers.append('Accept', 'application/json');                                                
   headers.append('Access-Control-Allow-Origin', url);                                          
-  let authToken;                                                
-  if (token) {
-    authToken = token;
+  let authToken;
+  if (token) {                 
+    authToken = token;         
+  } 
+  if (authToken) {         
     headers.append(appConfigs.TOKEN_NAME, authToken);
+  }
+  if (headers.has(appConfigs.TOKEN_NAME)){
+    console.log("fetchConfig token found ", headers.get(appConfigs.TOKEN_NAME));
   }else{
     console.log("Token not found in fetchConfig[fetch-configs.js]");
   }

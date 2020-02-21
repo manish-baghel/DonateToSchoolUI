@@ -35,7 +35,6 @@ function getTokenValue() {
   };
   // getObjectStore(STORE_NAME_1).openCursor().onsuccess = function(event) {
   //   var cursor = event.target.result;
-
   //   if(cursor){
   //     let key = cursor.value;
   //     console.log(cursor);
@@ -49,9 +48,7 @@ function getTokenValue() {
 openDatabaseAndReplayRequests();
 
 self.addEventListener('fetch', event => {
-  event.waitUntil(
-    getTokenValue()
-  );
+  event.waitUntil(getTokenValue());
   event.respondWith(customHeaderRequestFetch(event))
 })
 
