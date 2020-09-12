@@ -23,7 +23,7 @@
     "cors": "^2.8.5",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "path": "^0.12.7",
     "serve-favicon": "^2.5.0",
     "yenv": "^2.1.1"
